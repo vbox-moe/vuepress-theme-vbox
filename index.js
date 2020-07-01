@@ -11,8 +11,6 @@ module.exports = (options, ctx) => {
       (base) => themeConfig.locales[base].algolia
     )
 
-  const enableSmoothScroll = themeConfig.smoothScroll === true
-
   return {
     alias() {
       return {
@@ -23,16 +21,44 @@ module.exports = (options, ctx) => {
     },
 
     plugins: [
-      ['@vuepress/active-header-links', options.activeHeaderLinks],
+      '@vuepress/active-header-links',
       '@vuepress/search',
       '@vuepress/plugin-nprogress',
+      '@vuepress/back-to-top',
+      '@vuepress/medium-zoom',
+      '@vuepress/pwa',
+      'vuepress-plugin-table-of-contents',
+      'vuepress-plugin-alias',
+      'vuepress-plugin-reading-time',
+      'vuepress-plugin-autometa',
+      'tabs',
+      'code-switcher',
+      'vuepress-plugin-auto-sidebar',
+      'vuepress-plugin-right-anchor',
+      'authors',
+      'seo',
+      ['vuepress-plugin-code-copy', true],
+      [
+        'autonav',
+        {
+          enable: true
+        }
+      ],
+      [
+        'vuepress-plugin-clean-urls',
+        {
+          normalSuffix: '',
+          indexSuffix: '',
+          notFoundPath: '/404.html'
+        }
+      ],
       [
         'container',
         {
           type: 'tip',
           defaultTitle: {
-            '/': 'TIP',
-            '/zh/': '提示'
+            '/': '提示',
+            '/en/': 'TIP'
           }
         }
       ],
@@ -41,8 +67,8 @@ module.exports = (options, ctx) => {
         {
           type: 'warning',
           defaultTitle: {
-            '/': 'WARNING',
-            '/zh/': '注意'
+            '/': '注意',
+            '/en/': 'WARNING'
           }
         }
       ],
@@ -51,8 +77,8 @@ module.exports = (options, ctx) => {
         {
           type: 'danger',
           defaultTitle: {
-            '/': 'WARNING',
-            '/zh/': '警告'
+            '/': '警告',
+            '/en/': 'WARNING'
           }
         }
       ],
@@ -67,7 +93,7 @@ module.exports = (options, ctx) => {
           after: () => '</details>\n'
         }
       ],
-      ['smooth-scroll', enableSmoothScroll]
+      ['smooth-scroll', true]
     ]
   }
 }
