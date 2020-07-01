@@ -9,6 +9,9 @@
     "vuepress",
     "vbox"
   ],
+  "scripts": {
+    "lint": "eslint . --fix"
+  },
   "license": "MIT",
   "author": "Il Harper",
   "main": "index.js",
