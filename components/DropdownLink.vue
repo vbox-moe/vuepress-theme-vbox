@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="dropdown-wrapper"
-    :class="{ open }"
-  >
+  <div class="dropdown-wrapper" :class="{ open }">
     <button
       class="dropdown-title"
       type="button"
@@ -10,17 +7,11 @@
       @click="setOpen(!open)"
     >
       <span class="title">{{ item.text }}</span>
-      <span
-        class="arrow"
-        :class="open ? 'down' : 'right'"
-      />
+      <span class="arrow" :class="open ? 'down' : 'right'" />
     </button>
 
     <DropdownTransition>
-      <ul
-        v-show="open"
-        class="nav-dropdown"
-      >
+      <ul v-show="open" class="nav-dropdown">
         <li
           v-for="(subItem, index) in item.items"
           :key="subItem.link || index"
@@ -30,10 +21,7 @@
             {{ subItem.text }}
           </h4>
 
-          <ul
-            v-if="subItem.type === 'links'"
-            class="dropdown-subitem-wrapper"
-          >
+          <ul v-if="subItem.type === 'links'" class="dropdown-subitem-wrapper">
             <li
               v-for="childSubItem in subItem.items"
               :key="childSubItem.link"
@@ -80,30 +68,30 @@ export default {
     }
   },
 
-  data () {
+  data() {
     return {
       open: false
     }
   },
 
   computed: {
-    dropdownAriaLabel () {
+    dropdownAriaLabel() {
       return this.item.ariaLabel || this.item.text
     }
   },
 
   watch: {
-    $route () {
+    $route() {
       this.open = false
     }
   },
 
   methods: {
-    setOpen (value) {
+    setOpen(value) {
       this.open = value
     },
 
-    isLastItemOfArray (item, array) {
+    isLastItemOfArray(item, array) {
       return last(array) === item
     }
   }

@@ -1,13 +1,7 @@
 <template>
-  <div
-    v-if="prev || next"
-    class="page-nav"
-  >
+  <div v-if="prev || next" class="page-nav">
     <p class="inner">
-      <span
-        v-if="prev"
-        class="prev"
-      >
+      <span v-if="prev" class="prev">
         ←
         <a
           v-if="prev.type === 'external'"
@@ -21,19 +15,12 @@
           <OutboundLink />
         </a>
 
-        <RouterLink
-          v-else
-          class="prev"
-          :to="prev.path"
-        >
+        <RouterLink v-else class="prev" :to="prev.path">
           {{ prev.title || prev.path }}
         </RouterLink>
       </span>
 
-      <span
-        v-if="next"
-        class="next"
-      >
+      <span v-if="next" class="next">
         <a
           v-if="next.type === 'external'"
           :href="next.path"
@@ -45,10 +32,7 @@
           <OutboundLink />
         </a>
 
-        <RouterLink
-          v-else
-          :to="next.path"
-        >
+        <RouterLink v-else :to="next.path">
           {{ next.title || next.path }}
         </RouterLink>
         →
@@ -68,21 +52,21 @@ export default {
   props: ['sidebarItems'],
 
   computed: {
-    prev () {
+    prev() {
       return resolvePageLink(LINK_TYPES.PREV, this)
     },
 
-    next () {
+    next() {
       return resolvePageLink(LINK_TYPES.NEXT, this)
     }
   }
 }
 
-function resolvePrev (page, items) {
+function resolvePrev(page, items) {
   return find(page, items, -1)
 }
 
-function resolveNext (page, items) {
+function resolveNext(page, items) {
   return find(page, items, 1)
 }
 
@@ -99,7 +83,7 @@ const LINK_TYPES = {
   }
 }
 
-function resolvePageLink (
+function resolvePageLink(
   linkType,
   { $themeConfig, $page, $route, $site, sidebarItems }
 ) {
@@ -123,7 +107,7 @@ function resolvePageLink (
   }
 }
 
-function find (page, items, offset) {
+function find(page, items, offset) {
   const res = []
   flatten(items, res)
   for (let i = 0; i < res.length; i++) {
@@ -134,7 +118,7 @@ function find (page, items, offset) {
   }
 }
 
-function flatten (items, res) {
+function flatten(items, res) {
   for (let i = 0, l = items.length; i < l; i++) {
     if (items[i].type === 'group') {
       flatten(items[i].children || [], res)
