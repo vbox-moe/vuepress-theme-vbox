@@ -5,14 +5,15 @@ module.exports = {
     node: true,
     es2020: true
   },
-  extends: [
-    'prettier',
-    'prettier/vue',
-    'plugin:vue/recommended',
-    'plugin:prettier/recommended',
-    'eslint:recommended'
-  ],
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    sourceType: 'module',
+    parser: 'babel-eslint',
+    allowImportExportEverywhere: true
+  },
+  extends: ['eslint:recommended'],
   plugins: ['prettier'],
   rules: {
+    'no-unused-vars': 1
   }
 }

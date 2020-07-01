@@ -10,7 +10,7 @@
     "vbox"
   ],
   "scripts": {
-    "lint": "eslint . --fix"
+    "lint": "eslint . --ext .js,.vue --fix"
   },
   "license": "MIT",
   "author": "Il Harper",
@@ -27,10 +27,12 @@
     "vuepress-plugin-smooth-scroll": "^0.0.3"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.2.3",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "vue-eslint-parser": "^7.1.0"
   }
 }
