@@ -1,0 +1,26 @@
+{
+  "name": "vuepress-theme-vbox",
+  "version": "0.1.0",
+  "description": "Default theme for VBox.",
+  "keywords": [
+    "documentation",
+    "generator",
+    "vue",
+    "vuepress",
+    "vbox"
+  ],
+  "license": "MIT",
+  "author": "Il Harper",
+  "main": "index.js",
+  "dependencies": {
+    "@vuepress/plugin-active-header-links": "1.5.2",
+    "@vuepress/plugin-nprogress": "1.5.2",
+    "@vuepress/plugin-search": "1.5.2",
+    "docsearch.js": "^2.5.2",
+    "lodash": "^4.17.15",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vuepress-plugin-container": "^2.0.2",
+    "vuepress-plugin-smooth-scroll": "^0.0.3"
+  }
+}
