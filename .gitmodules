@@ -1,0 +1,3 @@
+[submodule "components/MavonEditor"]
+	path = components/MavonEditor
+	url = https://github.com/vbox-moe/MavonEditor.git
