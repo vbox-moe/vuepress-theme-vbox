@@ -33,8 +33,6 @@ module.exports = (options, ctx) => {
       'vuepress-plugin-autometa',
       'tabs',
       'code-switcher',
-      'vuepress-plugin-auto-sidebar',
-      'vuepress-plugin-right-anchor',
       'authors',
       'seo',
       ['vuepress-plugin-code-copy', true],
