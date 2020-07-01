@@ -14,6 +14,7 @@ module.exports = {
   extends: ['eslint:recommended'],
   plugins: ['prettier'],
   rules: {
-    'no-unused-vars': 1
+    'no-unused-vars': 1,
+    'no-prototype-builtins': 1
   }
 }
