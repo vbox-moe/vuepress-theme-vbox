@@ -5,7 +5,7 @@
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
   >
-    <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
+    <Navbar @toggle-sidebar="toggleSidebar" />
 
     <div class="sidebar-mask" @click="toggleSidebar(false)" />
 
@@ -55,30 +55,6 @@ export default {
   },
 
   computed: {
-    shouldShowNavbar() {
-      const { themeConfig } = this.$site
-      const { frontmatter } = this.$page
-      if (frontmatter.navbar === false || themeConfig.navbar === false) {
-        return false
-      }
-      return (
-        this.$title ||
-        themeConfig.logo ||
-        themeConfig.repo ||
-        themeConfig.nav ||
-        this.$themeLocaleConfig.nav
-      )
-    },
-
-    shouldShowSidebar() {
-      const { frontmatter } = this.$page
-      return (
-        !frontmatter.home &&
-        frontmatter.sidebar !== false &&
-        this.sidebarItems.length
-      )
-    },
-
     sidebarItems() {
       return resolveSidebarItems(
         this.$page,
@@ -92,9 +68,7 @@ export default {
       const userPageClass = this.$page.frontmatter.pageClass
       return [
         {
-          'no-navbar': !this.shouldShowNavbar,
-          'sidebar-open': this.isSidebarOpen,
-          'no-sidebar': !this.shouldShowSidebar
+          'sidebar-open': this.isSidebarOpen
         },
         userPageClass
       ]
