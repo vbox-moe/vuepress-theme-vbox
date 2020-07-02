@@ -34,20 +34,12 @@ module.exports = (options, ctx) => {
       'tabs',
       'code-switcher',
       'authors',
-      'seo',
+      ['seo', false],
       ['vuepress-plugin-code-copy', true],
       [
         'autonav',
         {
           enable: true
-        }
-      ],
-      [
-        'vuepress-plugin-clean-urls',
-        {
-          normalSuffix: '',
-          indexSuffix: '',
-          notFoundPath: '/404.html'
         }
       ],
       [
