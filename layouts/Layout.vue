@@ -55,6 +55,11 @@ export default {
   },
 
   computed: {
+    shouldShowSidebar() {
+      const { frontmatter } = this.$page
+      return !frontmatter.home && frontmatter.sidebar !== false
+    },
+
     sidebarItems() {
       return resolveSidebarItems(
         this.$page,
@@ -68,7 +73,8 @@ export default {
       const userPageClass = this.$page.frontmatter.pageClass
       return [
         {
-          'sidebar-open': this.isSidebarOpen
+          'sidebar-open': this.isSidebarOpen,
+          'no-sidebar': !this.shouldShowSidebar
         },
         userPageClass
       ]
