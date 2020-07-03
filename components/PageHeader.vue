@@ -9,21 +9,35 @@
       ·
       {{ $page.readingTime.words }} 字 ·
       <img
-        :alt="author.name"
+        :alt="author.username"
         :key="author.email"
+        :src="'https://www.gravatar.com/avatar/' + hashEmail(author.email)"
         v-for="author in $page.authors"
+        class="header-bar-author-avatar"
+        width="20px"
       />
-      ·
     </p>
   </div>
 </template>
 
 <script>
-export default {}
+import md5 from 'crypto-js/md5'
+export default {
+  methods: {
+    hashEmail(email) {
+      return md5(email)
+    }
+  }
+}
 </script>
 
 <style>
 .header-bar {
   color: #818a94;
+}
+
+.header-bar-author-avatar {
+  margin-top: 2px;
+  border-radius: 20px;
 }
 </style>

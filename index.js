@@ -25,7 +25,13 @@ module.exports = (options, ctx) => {
       '@vuepress/search',
       '@vuepress/plugin-nprogress',
       '@vuepress/back-to-top',
-      '@vuepress/medium-zoom',
+      [
+        '@vuepress/medium-zoom',
+        {
+          selector:
+            '.theme-default-content :not(a) > img :not(.header-bar-author-avatar)'
+        }
+      ],
       '@vuepress/pwa',
       'vuepress-plugin-table-of-contents',
       'vuepress-plugin-alias',
