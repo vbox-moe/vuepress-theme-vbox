@@ -2,19 +2,36 @@
   <header class="navbar">
     <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
+    <RouterLink :to="$localePath" class="global-home-link">
+      <img
+        v-if="$site.themeConfig.logo"
+        class="logo"
+        :src="$withBase($site.themeConfig.logo)"
+        :alt="$siteTitle"
+      />
+      <span
+        v-if="$siteTitle"
+        ref="siteName"
+        class="site-name"
+        :class="{ 'can-hide': $site.themeConfig.logo }"
+        >&lt;</span
+      >
+    </RouterLink>
+
     <RouterLink :to="$localePath" class="home-link">
       <img
         v-if="$site.themeConfig.logo"
         class="logo"
         :src="$withBase($site.themeConfig.logo)"
         :alt="$siteTitle"
-      >
+      />
       <span
         v-if="$siteTitle"
         ref="siteName"
         class="site-name"
         :class="{ 'can-hide': $site.themeConfig.logo }"
-      >{{ $siteTitle }}</span>
+        >{{ $siteTitle }}</span
+      >
     </RouterLink>
 
     <div
@@ -22,8 +39,8 @@
       :style="
         linksWrapMaxWidth
           ? {
-            'max-width': linksWrapMaxWidth + 'px'
-          }
+              'max-width': linksWrapMaxWidth + 'px'
+            }
           : {}
       "
     >
@@ -104,9 +121,12 @@ function css(el, property) {
 <style lang="stylus">
 $navbar-vertical-padding = 0.7rem
 $navbar-horizontal-padding = 1.5rem
-
+.global-home-link
+  margin-left 0
+  margin-right 0.2rem
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
+  padding-left 0.6rem
   line-height $navbarHeight - 1.4rem
   a, span, img
     display inline-block
@@ -131,9 +151,8 @@ $navbar-horizontal-padding = 1.5rem
     top $navbar-vertical-padding
     display flex
     .search-box
-      flex: 0 0 auto
+      flex 0 0 auto
       vertical-align top
-
 @media (max-width: $MQMobile)
   .navbar
     padding-left 4rem
