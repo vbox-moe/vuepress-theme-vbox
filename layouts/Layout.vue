@@ -9,7 +9,7 @@
 
     <div class="sidebar-mask" @click="toggleSidebar(false)" />
 
-    <Sidebar :items="sidebarItems" @toggle-sidebar="toggleSidebar">
+    <Sidebar :items="$page.sidebarItems" @toggle-sidebar="toggleSidebar">
       <template #top>
         <slot name="sidebar-top" />
       </template>
@@ -20,7 +20,7 @@
 
     <Home v-if="$page.frontmatter.home" />
 
-    <Page v-else :sidebar-items="sidebarItems">
+    <Page v-else :sidebar-items="$page.sidebarItems">
       <template #top>
         <slot name="page-top" />
       </template>
@@ -39,7 +39,6 @@ import Navbar from '@theme/components/Navbar.vue'
 import Page from '@theme/components/Page.vue'
 import Sidebar from '@theme/components/Sidebar.vue'
 import Contentbar from '@theme/components/Contentbar.vue'
-import { resolveSidebarItems } from '../util'
 
 export default {
   name: 'Layout',
@@ -62,15 +61,6 @@ export default {
     shouldShowSidebar() {
       const { frontmatter } = this.$page
       return !frontmatter.home && frontmatter.sidebar !== false
-    },
-
-    sidebarItems() {
-      return resolveSidebarItems(
-        this.$page,
-        this.$page.regularPath,
-        this.$site,
-        this.$localePath
-      )
     },
 
     pageClasses() {
