@@ -16,6 +16,7 @@
         class="header-bar-author-avatar"
         width="20px"
       />
+      共 {{ $page.authors.length }} 人
     </p>
   </div>
 </template>
