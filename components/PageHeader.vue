@@ -23,6 +23,7 @@
 <script>
 import md5 from 'crypto-js/md5'
 export default {
+  name: 'PageHeader',
   methods: {
     hashEmail(email) {
       return md5(email)
