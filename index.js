@@ -21,6 +21,7 @@ module.exports = (options, ctx) => {
     },
 
     plugins: [
+      'vuepress-plugin-vbox',
       '@vuepress/active-header-links',
       '@vuepress/search',
       '@vuepress/plugin-nprogress',
