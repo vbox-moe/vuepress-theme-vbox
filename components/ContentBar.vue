@@ -85,12 +85,17 @@ export default {
     window.addEventListener(
       'scroll',
       debounce(() => {
-        const scrollTop = this.getScrollTop()
+        const scrollTop = this.getScrollTop() + 125
+        let findItem = false
 
         this.listData.map((item, index) => {
-          if (item.offsetTop && scrollTop >= item.offsetTop)
+          if (item.offsetTop && scrollTop >= item.offsetTop) {
             this.activeIndex = index
+            findItem = true
+          }
         })
+
+        if (!findItem) this.activeIndex = false
       }, 300)
     )
   }
