@@ -9,7 +9,11 @@
 
     <div class="sidebar-mask" @click="toggleSidebar(false)" />
 
-    <Sidebar :items="$page.sidebarItems" @toggle-sidebar="toggleSidebar">
+    <Sidebar
+      v-if="!$page.frontmatter.home && $page.regularPath !== '/'"
+      :items="$page.sidebarItems"
+      @toggle-sidebar="toggleSidebar"
+    >
       <template #top>
         <slot name="sidebar-top" />
       </template>
@@ -18,7 +22,7 @@
       </template>
     </Sidebar>
 
-    <Home v-if="$page.frontmatter.home" />
+    <Home v-if="$page.frontmatter.home || $page.regularPath === '/'" />
 
     <Page v-else :sidebar-items="$page.sidebarItems">
       <template #top>
@@ -29,7 +33,7 @@
       </template>
     </Page>
 
-    <Contentbar />
+    <Contentbar v-if="!$page.frontmatter.home && $page.regularPath !== '/'" />
   </div>
 </template>
 

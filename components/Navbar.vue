@@ -7,9 +7,17 @@
         <img class="logo" src="/logo.png" :alt="$siteTitle" />
       </RouterLink>
 
-      <span class="link-slash site-name">/</span>
+      <span
+        v-if="$page.breadcrumbItems && $page.breadcrumbItems.length"
+        class="link-slash site-name"
+        >/</span
+      >
 
-      <RouterLink :to="$page.breadcrumbItems[0].regularPath" class="home-link">
+      <RouterLink
+        v-if="$page.breadcrumbItems && $page.breadcrumbItems.length"
+        :to="$page.breadcrumbItems[0].regularPath"
+        class="home-link"
+      >
         <span ref="siteName" class="site-name">{{
           $page.breadcrumbItems[0].title
         }}</span>
