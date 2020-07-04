@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: 'SelectButton',
   props: {
     title: {
       type: String,
