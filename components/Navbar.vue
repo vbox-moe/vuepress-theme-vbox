@@ -1,6 +1,16 @@
 <template>
-  <header class="navbar">
-    <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
+  <header
+    class="navbar"
+    :style="
+      $page.sidebarItems && $page.sidebarItems.length > 0
+        ? ''
+        : 'padding-left: 1.5rem'
+    "
+  >
+    <SidebarButton
+      v-if="$page.sidebarItems && $page.sidebarItems.length > 0"
+      @toggle-sidebar="$emit('toggle-sidebar')"
+    />
 
     <span class="home-link-group">
       <RouterLink :to="$localePath" class="global-home-link">
