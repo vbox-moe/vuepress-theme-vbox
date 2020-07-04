@@ -100,7 +100,7 @@ export default {
     window.addEventListener(
       'scroll',
       debounce(() => {
-        const scrollTop = this.getScrollTop() + 125
+        const scrollTop = this.getScrollTop()
         let findItem = false
 
         this.listData.map((item, index) => {
