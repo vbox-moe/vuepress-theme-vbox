@@ -3,35 +3,15 @@
     <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
     <RouterLink :to="$localePath" class="global-home-link">
-      <img
-        v-if="$site.themeConfig.logo"
-        class="logo"
-        :src="$withBase($site.themeConfig.logo)"
-        :alt="$siteTitle"
-      />
-      <span
-        v-if="$siteTitle"
-        ref="siteName"
-        class="site-name"
-        :class="{ 'can-hide': $site.themeConfig.logo }"
-        >&lt;</span
-      >
+      <img class="logo" src="/logo.png" :alt="$siteTitle" />
     </RouterLink>
 
-    <RouterLink :to="$localePath" class="home-link">
-      <img
-        v-if="$site.themeConfig.logo"
-        class="logo"
-        :src="$withBase($site.themeConfig.logo)"
-        :alt="$siteTitle"
-      />
-      <span
-        v-if="$siteTitle"
-        ref="siteName"
-        class="site-name"
-        :class="{ 'can-hide': $site.themeConfig.logo }"
-        >{{ $siteTitle }}</span
-      >
+    <span>/</span>
+
+    <RouterLink :to="$page.breadcrumbItems[0].regularPath" class="home-link">
+      <span ref="siteName" class="site-name">{{
+        $page.breadcrumbItems[0].title
+      }}</span>
     </RouterLink>
 
     <div
