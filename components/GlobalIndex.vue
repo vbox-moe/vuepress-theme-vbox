@@ -2,6 +2,8 @@
   <main class="home" aria-labelledby="main-title">
     <Content class="theme-default-content custom" />
 
+    <ProductList />
+
     <div v-if="$page.frontmatter.footer" class="footer">
       {{ $page.frontmatter.footer }}
     </div>
@@ -9,8 +11,12 @@
 </template>
 
 <script>
+import ProductList from '@theme/components/ProductList.vue'
+
 export default {
-  name: 'GlobalIndex'
+  name: 'GlobalIndex',
+
+  conponents: { ProductList }
 }
 </script>
 
