@@ -22,7 +22,9 @@
       </template>
     </Sidebar>
 
-    <Home v-if="$page.frontmatter.home || $page.regularPath === '/'" />
+    <GlobalIndex v-if="$page.regularPath === '/'" />
+
+    <Home v-else-if="$page.frontmatter.home" />
 
     <Page v-else :sidebar-items="$page.sidebarItems">
       <template #top>
@@ -38,6 +40,7 @@
 </template>
 
 <script>
+import GlobalIndex from '@theme/components/GlobalIndex.vue'
 import Home from '@theme/components/Home.vue'
 import Navbar from '@theme/components/Navbar.vue'
 import Page from '@theme/components/Page.vue'
@@ -48,6 +51,7 @@ export default {
   name: 'Layout',
 
   components: {
+    GlobalIndex,
     Home,
     Page,
     Sidebar,

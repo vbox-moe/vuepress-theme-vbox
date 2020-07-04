@@ -7,32 +7,20 @@
         :alt="data.heroAlt || 'hero'"
       />
 
-      <h1
-        v-if="data.heroText !== null && $page.regularPath !== '/'"
-        id="main-title"
-      >
+      <h1 v-if="data.heroText !== null" id="main-title">
         {{ data.heroText || $title || 'Hello' }}
       </h1>
 
-      <p
-        v-if="data.tagline !== null && $page.regularPath !== '/'"
-        class="description"
-      >
+      <p v-if="data.tagline !== null" class="description">
         {{ data.tagline || $description || 'Welcome to your VuePress site' }}
       </p>
 
-      <p
-        v-if="data.actionText && data.actionLink && $page.regularPath !== '/'"
-        class="action"
-      >
+      <p v-if="data.actionText && data.actionLink" class="action">
         <NavLink class="action-button" :item="actionLink" />
       </p>
     </header>
 
-    <div
-      v-if="data.features && data.features.length && $page.regularPath !== '/'"
-      class="features"
-    >
+    <div v-if="data.features && data.features.length" class="features">
       <div
         v-for="(feature, index) in data.features"
         :key="index"
