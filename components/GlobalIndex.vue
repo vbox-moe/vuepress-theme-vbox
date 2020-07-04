@@ -1,5 +1,7 @@
 <template>
-  <main class="home" aria-labelledby="main-title">
+  <main class="global-index" aria-labelledby="main-title">
+    <section class="global-index-section"></section>
+
     <Content class="theme-default-content custom" />
 
     <ProductList />
@@ -16,16 +18,19 @@ import ProductList from '@theme/components/ProductList.vue'
 export default {
   name: 'GlobalIndex',
 
-  conponents: { ProductList }
+  components: { ProductList }
 }
 </script>
 
 <style lang="stylus">
-.home
+.global-index
   padding $navbarHeight 2rem 0
-  max-width $homePageWidth
+  // max-width $homePageWidth
   margin 0px auto
   display block
+  .global-index-section
+    height 30vh
+    display flex
   .footer
     padding 2.5rem
     border-top 1px solid $borderColor
