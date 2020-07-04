@@ -2,12 +2,12 @@
   <main class="global-index" aria-labelledby="main-title">
     <section class="global-index-section">
       <div class="global-index-section-card">
-        <p class="global-index-section-card-title">{{ $site.pages.length }}</p>
-        <p class="global-index-section-card-descrip">篇文档在库</p>
-      </div>
-      <div class="global-index-section-card">
         <p class="global-index-section-card-title">{{ $page.authorCount }}</p>
         <p class="global-index-section-card-descrip">名活跃维护者</p>
+      </div>
+      <div class="global-index-section-card">
+        <p class="global-index-section-card-title">{{ $site.pages.length }}</p>
+        <p class="global-index-section-card-descrip">篇文档在库</p>
       </div>
     </section>
 
