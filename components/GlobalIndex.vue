@@ -43,6 +43,7 @@ export default {
     flex-direction row-reverse
     color lighten($textColor, 75%)
     font-weight bold
+    user-select none
     .global-index-section-card
       padding 1rem
       text-align right
