@@ -35,7 +35,7 @@
       </template>
     </Page>
 
-    <Contentbar v-if="!$page.frontmatter.home && $page.regularPath !== '/'" />
+    <ContentBar v-if="!$page.frontmatter.home && $page.regularPath !== '/'" />
   </div>
 </template>
 
@@ -45,7 +45,7 @@ import Home from '@theme/components/Home.vue'
 import Navbar from '@theme/components/Navbar.vue'
 import Page from '@theme/components/Page.vue'
 import Sidebar from '@theme/components/Sidebar.vue'
-import Contentbar from '@theme/components/Contentbar.vue'
+import ContentBar from '@theme/components/ContentBar.vue'
 
 export default {
   name: 'Layout',
@@ -56,7 +56,7 @@ export default {
     Page,
     Sidebar,
     Navbar,
-    Contentbar
+    ContentBar
   },
 
   data() {
