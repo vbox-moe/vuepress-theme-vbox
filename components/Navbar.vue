@@ -6,7 +6,7 @@
       <img class="logo" src="/logo.png" :alt="$siteTitle" />
     </RouterLink>
 
-    <span>/</span>
+    <span class="link-slash site-name">/</span>
 
     <RouterLink :to="$page.breadcrumbItems[0].regularPath" class="home-link">
       <span ref="siteName" class="site-name">{{
@@ -102,19 +102,20 @@ function css(el, property) {
 $navbar-vertical-padding = 0.7rem
 $navbar-horizontal-padding = 1.5rem
 .global-home-link
-  margin-left 0
-  margin-right 0.2rem
+  margin 0
+  padding 0
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
-  padding-left 0.6rem
+  // padding-left 0.6rem
   line-height $navbarHeight - 1.4rem
   a, span, img
     display inline-block
   .logo
     height $navbarHeight - 1.4rem
-    min-width $navbarHeight - 1.4rem
-    margin-right 0.8rem
+    // min-width $navbarHeight - 1.4rem
+    // margin-right 0.8rem
     vertical-align top
+    margin-top -1px
   .site-name
     font-size 1.3rem
     font-weight 600
@@ -133,6 +134,9 @@ $navbar-horizontal-padding = 1.5rem
     .search-box
       flex 0 0 auto
       vertical-align top
+.link-slash
+  margin-left 0.3rem
+  margin-right 0.5rem
 @media (max-width: $MQMobile)
   .navbar
     padding-left 4rem
