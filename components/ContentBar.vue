@@ -1,5 +1,20 @@
 <template>
   <div class="content-bar">
+    <span class="content-bar-actions">
+      <a :href="'#' + $page.title"
+        ><svg
+          class="content-bar-actions-icon"
+          viewBox="0 0 1024 1024"
+          xmlns="http://www.w3.org/2000/svg"
+          width="30"
+          height="30"
+        >
+          <path
+            d="M166.4 512A132.266667 132.266667 0 0 1 298.666667 379.733333h170.666666V298.666667H298.666667a213.333333 213.333333 0 0 0 0 426.666666h170.666666v-81.066666H298.666667A132.266667 132.266667 0 0 1 166.4 512zM341.333333 554.666667h341.333334v-85.333334H341.333333v85.333334z m384-256h-170.666666v81.066666h170.666666a132.266667 132.266667 0 1 1 0 264.533334h-170.666666V725.333333h170.666666a213.333333 213.333333 0 0 0 0-426.666666z"
+            fill="currentColor"
+          ></path></svg
+      ></a>
+    </span>
     <p>在此页面中……</p>
 
     <li
@@ -117,4 +132,9 @@ export default {
 @media (max-width: $MQMobile)
   .content-bar
     display none
+.content-bar-actions
+  margin 0
+  padding 0
+.content-bar-actions-icon
+  color $accentColor
 </style>

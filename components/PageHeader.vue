@@ -1,7 +1,17 @@
 <template>
   <div>
-    <h1>
-      <a :href="'#' + $page.title" class="header-anchor">#</a>
+    <p class="breadcrumb-bar header-bar">
+      <span
+        v-for="breadcrumb in $page.breadcrumbItems"
+        :key="breadcrumb.regularPath"
+        ><RouterLink :to="breadcrumb.regularPath">{{
+          breadcrumb.title
+        }}</RouterLink>
+        >
+      </span>
+      <span>{{ $page.title }}</span>
+    </p>
+    <h1 class="page-header-title">
       {{ $page.title }}
     </h1>
     <p class="header-bar">
@@ -41,5 +51,14 @@ export default {
 .header-bar-author-avatar {
   margin-top: 2px;
   border-radius: 20px;
+}
+
+.breadcrumb-bar {
+  margin: 0;
+  padding: 0;
+}
+
+.page-header-title {
+  margin-top: 0.8rem;
 }
 </style>
