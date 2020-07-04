@@ -2,17 +2,19 @@
   <header class="navbar">
     <SidebarButton @toggle-sidebar="$emit('toggle-sidebar')" />
 
-    <RouterLink :to="$localePath" class="global-home-link">
-      <img class="logo" src="/logo.png" :alt="$siteTitle" />
-    </RouterLink>
+    <span class="home-link-group">
+      <RouterLink :to="$localePath" class="global-home-link">
+        <img class="logo" src="/logo.png" :alt="$siteTitle" />
+      </RouterLink>
 
-    <span class="link-slash site-name">/</span>
+      <span class="link-slash site-name">/</span>
 
-    <RouterLink :to="$page.breadcrumbItems[0].regularPath" class="home-link">
-      <span ref="siteName" class="site-name">{{
-        $page.breadcrumbItems[0].title
-      }}</span>
-    </RouterLink>
+      <RouterLink :to="$page.breadcrumbItems[0].regularPath" class="home-link">
+        <span ref="siteName" class="site-name">{{
+          $page.breadcrumbItems[0].title
+        }}</span>
+      </RouterLink>
+    </span>
 
     <div
       class="links"
@@ -104,12 +106,19 @@ $navbar-horizontal-padding = 1.5rem
 .global-home-link
   margin 0
   padding 0
+.home-link-group
+  margin 0
+  padding 0
+  display flex
+.home-link-group *
+  justify-self center
+  align-self center
 .navbar
   padding $navbar-vertical-padding $navbar-horizontal-padding
   // padding-left 0.6rem
   line-height $navbarHeight - 1.4rem
   a, span, img
-    display inline-block
+    // display inline-block
   .logo
     height $navbarHeight - 1.4rem
     // min-width $navbarHeight - 1.4rem
@@ -145,7 +154,7 @@ $navbar-horizontal-padding = 1.5rem
     .links
       padding-left 1.5rem
     .site-name
-      width calc(100vw - 9.4rem)
+      // width calc(100vw - 9.4rem)
       overflow hidden
       white-space nowrap
       text-overflow ellipsis
