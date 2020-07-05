@@ -1,12 +1,17 @@
 <template>
-  <div></div>
+  <div class="theme-container" :class="pageClasses">
+    <Navbar />
+  </div>
 </template>
 
 <script>
+import Navbar from '@theme/components/Navbar.vue'
+
 export default {
-  name: 'Login'
+  name: 'Login',
+
+  components: {
+    Navbar
+  }
 }
 </script>
-
-<style>
-</style>
