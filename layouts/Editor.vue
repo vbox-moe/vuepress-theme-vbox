@@ -7,6 +7,7 @@
         </RouterLink>
       </span>
       <el-input v-model="fileName" placeholder="文件"></el-input>
+      <el-button style="margin: 0 10px;" type="primary">打开</el-button>
       <el-avatar></el-avatar>
     </div>
     <main class="home">
@@ -17,11 +18,14 @@
             :value="fileValue"
             language="markdown"
             @change="triggerValueChange"
+            :options="monacoOptions"
           />
         </div>
-        <div class="container-column" style="flex: 1;">
-          {{ fileValue }}
-        </div>
+        <div
+          class="container-column"
+          style="flex: 1; overflow: auto; height: 90%;"
+          v-html="renderedValue"
+        ></div>
       </div>
     </main>
     <div class="mobile-placeholder">
@@ -37,7 +41,11 @@
 </template>
 
 <script>
-import md from '@vuepress/markdown'
+import mdit from 'markdown-it'
+import mdit_anchor from 'markdown-it-anchor'
+import mdit_container from 'markdown-it-container'
+import mdit_emoji from 'markdown-it-emoji'
+import mdit_toc from 'markdown-it-table-of-contents'
 import MonacoEditor from '@theme/components/MonacoEditor'
 
 export default {
@@ -51,7 +59,21 @@ export default {
     return {
       fileName: '',
       fileValue: '',
-      mdRenderer: md({})
+      renderedValue: '',
+      mdRenderer: mdit({
+        html: true,
+        linkify: true,
+        typographer: true
+      })
+        .use(mdit_anchor)
+        .use(mdit_container)
+        .use(mdit_emoji)
+        .use(mdit_toc),
+      monacoOptions: {
+        wordWrap: 'on',
+        wordWrapMinified: false,
+        wrappingIndent: 'same'
+      }
     }
   },
 
@@ -61,7 +83,8 @@ export default {
 
   methods: {
     triggerValueChange(value) {
-      this.fileValue = this.mdRenderer(value)
+      this.fileValue = value
+      this.renderedValue = this.mdRenderer.render(value)
     }
   }
 }
