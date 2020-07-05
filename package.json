@@ -16,7 +16,10 @@
   "author": "Il Harper",
   "main": "index.js",
   "dependencies": {
-    "@vuepress/markdown": "^1.5.2",
+    "markdown-it": "^8.4.1",
+    "markdown-it-anchor": "^5.0.2",
+    "markdown-it-emoji": "^1.4.0",
+    "markdown-it-table-of-contents": "^0.4.0",
     "@vuepress/plugin-active-header-links": "1.5.2",
     "@vuepress/plugin-back-to-top": "^1.5.2",
     "@vuepress/plugin-medium-zoom": "^1.5.2",
