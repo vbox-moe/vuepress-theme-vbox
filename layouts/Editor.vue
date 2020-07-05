@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import md from '@vuepress/markdown'
 import MonacoEditor from '@theme/components/MonacoEditor'
 
 export default {
@@ -49,7 +50,8 @@ export default {
   data() {
     return {
       fileName: '',
-      fileValue: ''
+      fileValue: '',
+      mdRenderer: md({})
     }
   },
 
@@ -59,7 +61,7 @@ export default {
 
   methods: {
     triggerValueChange(value) {
-      this.fileValue = value
+      this.fileValue = this.mdRenderer(value)
     }
   }
 }
