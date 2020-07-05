@@ -25,6 +25,7 @@
     "axios": "^0.19.2",
     "crypto-js": "^4.0.0",
     "docsearch.js": "^2.5.2",
+    "element-ui": "^2.13.2",
     "lodash": "^4.17.15",
     "lodash.debounce": "^4.0.8",
     "monaco-editor": "^0.20.0",
