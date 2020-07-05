@@ -1,12 +1,24 @@
 <template>
-  <div>
-    <header class="navbar">
+  <div class="root-container">
+    <div class="navbar">
       <span class="home-link-group">
         <RouterLink :to="$localePath" class="global-home-link">
           <img class="logo" src="/logo.png" :alt="$siteTitle" />
         </RouterLink>
       </span>
-    </header>
+      <el-input v-model="fileValue" placeholder="文件"></el-input>
+      <el-avatar></el-avatar>
+    </div>
+    <main class="home">
+      <div class="container">
+        <div class="container-column">
+          <MonacoEditor class="monaco" :value="fileValue" />
+        </div>
+        <div class="container-column" style="flex: 1;">
+          b
+        </div>
+      </div>
+    </main>
     <div class="mobile-placeholder">
       <img
         src="/logo.png"
@@ -20,8 +32,25 @@
 </template>
 
 <script>
+import MonacoEditor from '@theme/components/MonacoEditor'
+
 export default {
-  name: 'Editor'
+  name: 'Editor',
+
+  components: {
+    MonacoEditor
+  },
+
+  data() {
+    return {
+      fileName: '',
+      fileValue: ''
+    }
+  },
+
+  mounted() {
+    if ('file' in this.$route.query) this.fileName = this.$route.query.file
+  }
 }
 </script>
 
@@ -42,32 +71,12 @@ $navbar-horizontal-padding = 1.5rem
   padding $navbar-vertical-padding $navbar-horizontal-padding
   // padding-left 0.6rem
   line-height $navbarHeight - 1.4rem
-  a, span, img
-    // display inline-block
+  display flex
+  flex-direction row
   .logo
     height $navbarHeight - 1.4rem
-    // min-width $navbarHeight - 1.4rem
-    // margin-right 0.8rem
     vertical-align top
     margin-top -1px
-  .site-name
-    font-size 1.3rem
-    font-weight 600
-    color $textColor
-    position relative
-  .links
-    padding-left 1.5rem
-    box-sizing border-box
-    background-color white
-    white-space nowrap
-    font-size 0.9rem
-    position absolute
-    right $navbar-horizontal-padding
-    top $navbar-vertical-padding
-    display flex
-    .search-box
-      flex 0 0 auto
-      vertical-align top
 .link-slash
   margin-left 0.3rem
   margin-right 0.5rem
@@ -77,8 +86,35 @@ $navbar-horizontal-padding = 1.5rem
   height 100vh
   display none
   user-select none
+.el-input, .el-input__inner
+  font-size 1.5rem
+  font-weight bold
+  margin 0 1rem
+  border none
+  background-color transparentify
+.home
+  padding 3.6rem 0
+  margin 0
+  display block
+  height 100%
+.container
+  display flex
+  flex-direction row
+  height 100%
+.container-column
+  margin 1rem
+  width 50%
+.root-container
+  height 100vh
+  width 100vw
+  display block
+  overflow hidden
+.monaco
+  display block
+  height 90%
+  width 100%
 @media (max-width: $MQMobile)
-  .navbar
+  .navbar, .home
     display none
   .mobile-placeholder
     display flex
