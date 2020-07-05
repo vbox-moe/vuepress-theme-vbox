@@ -6,16 +6,21 @@
           <img class="logo" src="/logo.png" :alt="$siteTitle" />
         </RouterLink>
       </span>
-      <el-input v-model="fileValue" placeholder="文件"></el-input>
+      <el-input v-model="fileName" placeholder="文件"></el-input>
       <el-avatar></el-avatar>
     </div>
     <main class="home">
       <div class="container">
         <div class="container-column">
-          <MonacoEditor class="monaco" :value="fileValue" />
+          <MonacoEditor
+            class="monaco"
+            :value="fileValue"
+            language="markdown"
+            @change="triggerValueChange"
+          />
         </div>
         <div class="container-column" style="flex: 1;">
-          b
+          {{ fileValue }}
         </div>
       </div>
     </main>
@@ -50,6 +55,12 @@ export default {
 
   mounted() {
     if ('file' in this.$route.query) this.fileName = this.$route.query.file
+  },
+
+  methods: {
+    triggerValueChange(value) {
+      this.fileValue = value
+    }
   }
 }
 </script>
