@@ -16,6 +16,7 @@
   "author": "Il Harper",
   "main": "index.js",
   "dependencies": {
+    "@vuepress/markdown": "^1.5.2",
     "@vuepress/plugin-active-header-links": "1.5.2",
     "@vuepress/plugin-back-to-top": "^1.5.2",
     "@vuepress/plugin-medium-zoom": "^1.5.2",
