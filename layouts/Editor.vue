@@ -72,7 +72,23 @@ export default {
       monacoOptions: {
         wordWrap: 'on',
         wordWrapMinified: false,
-        wrappingIndent: 'same'
+        wrappingIndent: 'same',
+        acceptSuggestionOnCommitCharacter: true,
+        acceptSuggestionOnEnter: true,
+        accessibilityHelpUrl: 'https://vbox.moe/VBox/Theme/Editor.html',
+        autoClosingBrackets: 'always',
+        autoClosingOvertype: 'always',
+        autoClosingQuotes: 'always',
+        automaticLayout: true,
+        colorDecorators: true,
+        cursorBlinking: 'smooth',
+        formatOnPaste: true,
+        parameterHints: {
+          cycle: true
+        },
+        showUnused: true,
+        smoothScrolling: true,
+        tabCompletion: 'on'
       }
     }
   },
