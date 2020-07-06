@@ -146,7 +146,9 @@ export default {
           } else {
             this.$notify.error({
               title: '错误',
-              message: '在加载时发生了错误。您仍然可以使用就地编辑器。',
+              message:
+                '在加载时发生了错误。您仍然可以使用就地编辑器。错误的信息：' +
+                (e && e.message ? e.message : '未知'),
               duration: 10000
             })
             this.loading = false
