@@ -7,8 +7,12 @@
         </RouterLink>
       </span>
       <el-input v-model="fileName" placeholder="文件"></el-input>
-      <el-button class="navbar-button" plain>打开</el-button>
-      <el-button class="navbar-button" type="primary">提交</el-button>
+      <el-button class="navbar-button" plain @click="triggerOpen">{{
+        loading ? '取消' : '打开'
+      }}</el-button>
+      <el-button class="navbar-button" type="primary" @click="triggerSubmit"
+        >提交</el-button
+      >
       <el-avatar class="navbar-button"></el-avatar>
     </div>
     <main
@@ -62,10 +66,18 @@ export default {
 
   data() {
     return {
+      // Page Loading
       loading: true,
+
+      // Page Data
       fileName: '',
       fileValue: '',
       renderedValue: '',
+
+      // Axios
+      cancelSource: this.$http.CancelToken.source(),
+
+      // MD Renderer & Editor
       mdRenderer: mdit({
         html: true,
         linkify: true,
@@ -101,26 +113,54 @@ export default {
 
   async mounted() {
     if ('file' in this.$route.query) this.fileName = this.$route.query.file
-    if (!this.fileName) return
-    this.fileValue = (
-      await this.$http.get(
-        `https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/${this
-          .$site.themeConfig.repo || ''}/master${
-          this.$site.themeConfig.docsDir
-            ? '/' + this.$site.themeConfig.docsDir
-            : ''
-        }${this.fileName}`
-      )
-    ).data
-    this.renderedValue = this.mdRenderer.render(this.fileValue)
-    this.loading = false
+    this.triggerFetch()
   },
 
   methods: {
     triggerValueChange(value) {
       this.fileValue = value
       this.renderedValue = this.mdRenderer.render(value)
-    }
+    },
+
+    async triggerFetch() {
+      this.loading = true
+      if (!this.fileName || this.fileName === '') return
+      this.fileValue = (
+        await this.$http
+          .get(
+            `https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/${this
+              .$site.themeConfig.repo || ''}/master${
+              this.$site.themeConfig.docsDir
+                ? '/' + this.$site.themeConfig.docsDir
+                : ''
+            }${this.fileName}`,
+            {
+              cancelToken: this.cancelSource.token
+            }
+          )
+          .catch((e) => {
+            if (this.$http.isCancel(e)) {
+              // Handle Cancel
+            } else {
+              // Handle Error
+            }
+          })
+      ).data
+      if (!this.fileValue || this.fileValue === '') return
+      this.renderedValue = this.mdRenderer.render(this.fileValue)
+      this.loading = false
+    },
+
+    triggerOpen() {
+      if (!this.loading) {
+        this.triggerFetch()
+      } else {
+        this.cancelSource.cancel()
+        this.loading = false
+      }
+    },
+
+    triggerSubmit() {}
   }
 }
 </script>
@@ -167,8 +207,7 @@ $navbar-horizontal-padding = 1.5rem
   border none
   background-color #00000000
 .home
-  padding 3.6rem 0
-  margin 0
+  margin 3.6rem 0
   display block
   height 100%
 .container
