@@ -32,7 +32,7 @@
         </div>
         <div
           class="container-column"
-          style="flex: 1; overflow: auto; height: 90%;"
+          style="flex: 1; overflow: auto;"
           v-html="renderedValue"
         ></div>
       </div>
