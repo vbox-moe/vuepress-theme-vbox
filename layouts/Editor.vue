@@ -128,32 +128,32 @@ export default {
     async triggerFetch() {
       this.loading = true
       if (!this.fileName || this.fileName === '') return
-      this.fileValue = (
-        await this.$http
-          .get(
-            `https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/${this
-              .$site.themeConfig.repo || ''}/master${
-              this.$site.themeConfig.docsDir
-                ? '/' + this.$site.themeConfig.docsDir
-                : ''
-            }${this.fileName}`,
-            {
-              cancelToken: this.cancelSource.token
-            }
-          )
-          .catch((e) => {
-            if (this.$http.isCancel(e)) {
-              this.loading = false
-            } else {
-              this.$notify.error({
-                title: '错误',
-                message: '在加载时发生了错误。您仍然可以使用就地编辑器。',
-                duration: 10000
-              })
-              this.loading = false
-            }
-          })
-      ).data
+      const result = await this.$http
+        .get(
+          `https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/${this
+            .$site.themeConfig.repo || ''}/master${
+            this.$site.themeConfig.docsDir
+              ? '/' + this.$site.themeConfig.docsDir
+              : ''
+          }${this.fileName}`,
+          {
+            cancelToken: this.cancelSource.token
+          }
+        )
+        .catch((e) => {
+          if (this.$http.isCancel(e)) {
+            this.loading = false
+          } else {
+            this.$notify.error({
+              title: '错误',
+              message: '在加载时发生了错误。您仍然可以使用就地编辑器。',
+              duration: 10000
+            })
+            this.loading = false
+          }
+        })
+      if (!result) return
+      this.fileValue = result.data
       if (!this.fileValue || this.fileValue === '') return
       this.renderedValue = this.mdRenderer.render(this.fileValue)
       this.loading = false
