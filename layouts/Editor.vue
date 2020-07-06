@@ -30,11 +30,9 @@
             :options="monacoOptions"
           />
         </div>
-        <div
-          class="container-column"
-          style="flex: 1; overflow: auto;"
-          v-html="renderedValue"
-        ></div>
+        <div class="container-column" style="flex: 1; overflow: auto;">
+          <div style="padding: 1rem" v-html="renderedValue"></div>
+        </div>
       </div>
     </main>
     <div class="mobile-placeholder">
