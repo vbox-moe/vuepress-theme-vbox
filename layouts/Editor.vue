@@ -98,7 +98,7 @@ export default {
     if (!this.fileName) return
     const loading = this.$loading({
       lock: true,
-      text: '加载文档\n在网络质量并不优秀的地区，这可能需要最多30秒时间。'
+      text: '正在加载文档。在网络质量并不优秀的地区，这可能需要最多30秒时间。'
     })
     this.fileValue = (
       await this.$http.get(
