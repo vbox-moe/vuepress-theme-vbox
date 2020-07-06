@@ -116,6 +116,8 @@ export default {
       this.fileName = this.$route.query.file
       this.triggerFetch()
     }
+    if (this.fileValue && this.fileValue !== '')
+      this.renderedValue = this.mdRenderer.render(this.fileValue)
   },
 
   methods: {
@@ -225,8 +227,10 @@ $navbar-horizontal-padding = 1.5rem
   flex-direction row
   height 100%
 .container-column
-  margin 1rem
+  height 88%
   width 50%
+  margin 1rem
+  box-shadow 0 0 5px 0 black
 .root-container
   height 100vh
   width 100vw
