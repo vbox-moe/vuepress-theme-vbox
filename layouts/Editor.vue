@@ -7,10 +7,18 @@
         </RouterLink>
       </span>
       <el-input v-model="fileName" placeholder="文件"></el-input>
-      <el-button class="navbar-button" plain @click="triggerOpen">{{
-        loading ? '取消' : '打开'
-      }}</el-button>
-      <el-button class="navbar-button" type="primary" @click="triggerSubmit"
+      <el-button
+        class="navbar-button"
+        plain
+        @click="triggerOpen"
+        :disabled="!this.fileName || this.fileName === ''"
+        >{{ loading ? '取消' : '打开' }}</el-button
+      >
+      <el-button
+        class="navbar-button"
+        type="primary"
+        @click="triggerSubmit"
+        :disabled="!this.fileName || this.fileName === ''"
         >提交</el-button
       >
       <el-avatar class="navbar-button"></el-avatar>
@@ -27,6 +35,7 @@
             :value="fileValue"
             language="markdown"
             @change="triggerValueChange"
+            @scroll="triggerEditorScroll"
             :options="monacoOptions"
           />
         </div>
@@ -124,6 +133,10 @@ export default {
       localStorage.fileValue = this.fileValue
       this.renderedValue = this.mdRenderer.render(value)
     },
+
+    triggerEditorScroll(value) {},
+
+    triggerPreviewerScroll(value) {},
 
     async triggerFetch() {
       this.loading = true
