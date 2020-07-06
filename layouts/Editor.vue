@@ -71,7 +71,7 @@ export default {
 
       // Page Data
       fileName: '',
-      fileValue: '',
+      fileValue: localStorage.fileValue || '',
       renderedValue: '',
 
       // Axios
@@ -112,13 +112,16 @@ export default {
   },
 
   async mounted() {
-    if ('file' in this.$route.query) this.fileName = this.$route.query.file
-    this.triggerFetch()
+    if ('file' in this.$route.query) {
+      this.fileName = this.$route.query.file
+      this.triggerFetch()
+    }
   },
 
   methods: {
     triggerValueChange(value) {
       this.fileValue = value
+      localStorage.fileValue = this.fileValue
       this.renderedValue = this.mdRenderer.render(value)
     },
 
@@ -140,9 +143,14 @@ export default {
           )
           .catch((e) => {
             if (this.$http.isCancel(e)) {
-              // Handle Cancel
+              this.loading = false
             } else {
-              // Handle Error
+              this.$notify.error({
+                title: '错误',
+                message: '在加载时发生了错误。您仍然可以使用就地编辑器。',
+                duration: 10000
+              })
+              this.loading = false
             }
           })
       ).data
