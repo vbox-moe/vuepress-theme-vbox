@@ -29,7 +29,7 @@
       element-loading-text="正在加载文档。在网络质量并不优秀的地区，这可能需要最多30秒时间。"
     >
       <div class="container">
-        <div class="container-column">
+        <div class="container-column" ref="editor">
           <MonacoEditor
             class="monaco"
             :value="fileValue"
@@ -39,7 +39,11 @@
             :options="monacoOptions"
           />
         </div>
-        <div class="container-column" style="flex: 1; overflow: auto;">
+        <div
+          class="container-column"
+          style="flex: 1; overflow: auto;"
+          ref="previewer"
+        >
           <div style="padding: 1rem" v-html="renderedValue"></div>
         </div>
       </div>
@@ -134,7 +138,14 @@ export default {
       this.renderedValue = this.mdRenderer.render(value)
     },
 
-    triggerEditorScroll(value) {},
+    triggerEditorScroll(e) {
+      // if (!this.$refs.previewer || !this.$refs.editor) return
+      // console.log(JSON.stringify(this.$refs.editor))
+      // return
+      // console.log((this.$refs.editor.divHeight + e.scrollTop) / e.scrollHeight)
+      // const previewer = this.$refs.previewer
+      // // previewer.scroll(value)
+    },
 
     triggerPreviewerScroll(value) {},
 

@@ -135,6 +135,10 @@ export default {
         }
       })
 
+      editor.onDidScrollChange((e) => {
+        this.$emit('scroll', e)
+      })
+
       this.$emit('editorDidMount', this.editor)
     },
 
