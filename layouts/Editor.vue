@@ -238,7 +238,7 @@ $navbar-horizontal-padding = 1.5rem
   overflow hidden
 .monaco
   display block
-  height 90%
+  height 100%
   width 100%
 @media (max-width: $MQMobile)
   .navbar, .home
