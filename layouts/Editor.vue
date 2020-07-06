@@ -7,8 +7,9 @@
         </RouterLink>
       </span>
       <el-input v-model="fileName" placeholder="文件"></el-input>
-      <el-button style="margin: 0 10px;" type="primary">打开</el-button>
-      <el-avatar></el-avatar>
+      <el-button class="navbar-button" plain>打开</el-button>
+      <el-button class="navbar-button" type="primary">提交</el-button>
+      <el-avatar class="navbar-button"></el-avatar>
     </div>
     <main class="home">
       <div class="container">
@@ -142,10 +143,13 @@ $navbar-horizontal-padding = 1.5rem
   line-height $navbarHeight - 1.4rem
   display flex
   flex-direction row
+  align-items center
   .logo
     height $navbarHeight - 1.4rem
     vertical-align top
     margin-top -1px
+.navbar-button
+  margin 0 10px
 .link-slash
   margin-left 0.3rem
   margin-right 0.5rem
@@ -160,7 +164,7 @@ $navbar-horizontal-padding = 1.5rem
   font-weight bold
   margin 0 1rem
   border none
-  background-color transparentify
+  background-color #00000000
 .home
   padding 3.6rem 0
   margin 0
