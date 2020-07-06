@@ -11,7 +11,11 @@
       <el-button class="navbar-button" type="primary">提交</el-button>
       <el-avatar class="navbar-button"></el-avatar>
     </div>
-    <main class="home">
+    <main
+      class="home"
+      v-loading="loading"
+      element-loading-text="正在加载文档。在网络质量并不优秀的地区，这可能需要最多30秒时间。"
+    >
       <div class="container">
         <div class="container-column">
           <MonacoEditor
@@ -58,6 +62,7 @@ export default {
 
   data() {
     return {
+      loading: true,
       fileName: '',
       fileValue: '',
       renderedValue: '',
@@ -97,10 +102,6 @@ export default {
   async mounted() {
     if ('file' in this.$route.query) this.fileName = this.$route.query.file
     if (!this.fileName) return
-    const loading = this.$loading({
-      lock: true,
-      text: '正在加载文档。在网络质量并不优秀的地区，这可能需要最多30秒时间。'
-    })
     this.fileValue = (
       await this.$http.get(
         `https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/${this
@@ -112,7 +113,7 @@ export default {
       )
     ).data
     this.renderedValue = this.mdRenderer.render(this.fileValue)
-    loading.close()
+    this.loading = false
   },
 
   methods: {
