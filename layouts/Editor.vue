@@ -93,8 +93,25 @@ export default {
     }
   },
 
-  mounted() {
+  async mounted() {
     if ('file' in this.$route.query) this.fileName = this.$route.query.file
+    if (!this.fileName) return
+    const loading = this.$loading({
+      lock: true,
+      text: '加载文档\n在网络质量并不优秀的地区，这可能需要最多30秒时间。'
+    })
+    this.fileValue = (
+      await this.$http.get(
+        `https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/${this
+          .$site.themeConfig.repo || ''}/master${
+          this.$site.themeConfig.docsDir
+            ? '/' + this.$site.themeConfig.docsDir
+            : ''
+        }${this.fileName}`
+      )
+    ).data
+    this.renderedValue = this.mdRenderer.render(this.fileValue)
+    loading.close()
   },
 
   methods: {
