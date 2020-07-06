@@ -112,10 +112,10 @@ export default {
   },
 
   async mounted() {
-    if ('file' in this.$route.query) {
+    if ('file' in this.$route.query && this.$route.query.file !== '') {
       this.fileName = this.$route.query.file
       this.triggerFetch()
-    }
+    } else this.loading = false
     if (this.fileValue && this.fileValue !== '')
       this.renderedValue = this.mdRenderer.render(this.fileValue)
   },
