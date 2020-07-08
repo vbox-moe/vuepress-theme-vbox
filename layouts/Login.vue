@@ -25,9 +25,21 @@ export default {
   },
 
   methods: {
-    triggerOAuth() {},
+    triggerOAuth() {
+      const dev = location.hostname === 'localhost'
+      const url = new URL('https://github.com/login/oauth/authorize')
+      url.searchParams.set(
+        'client_id',
+        this.$site.themeConfig.oauth[dev ? 'dev' : 'prod'].id || ''
+      )
+      url.searchParams.set('scope', 'public_repo')
+      window.location = url.toString()
+    },
 
-    triggerBot() {}
+    triggerBot() {
+      localStorage.token = this.$site.themeConfig.publicToken || ''
+      window.close()
+    }
   }
 }
 </script>
