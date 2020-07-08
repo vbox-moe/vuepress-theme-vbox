@@ -100,12 +100,23 @@
               language="markdown"
               :options="{ ...monacoOptions, readOnly: true, wordWrap: 'off' }"
             />
-            <div class="submit-appbar">
-              <el-button type="primary">我已完成审阅</el-button>
-            </div>
+          </div>
+          <div class="submit-appbar">
+            <el-button type="primary" @click="submitReady = true"
+              >我已完成审阅</el-button
+            >
           </div>
         </div>
-        <div v-else class="submit-container"></div>
+        <div v-else class="submit-container">
+          <div>
+            <p>对 {{ fileName }} 的修改：</p>
+          </div>
+          <div class="submit-form"></div>
+          <div class="submit-appbar">
+            <el-button plain @click="submitReady = false">返回</el-button>
+            <el-button type="primary" @click="triggerSubmit">提交</el-button>
+          </div>
+        </div>
       </transition>
     </el-drawer>
   </div>
@@ -401,6 +412,8 @@ $navbar-horizontal-padding = 1.5rem
 .submit-monaco
   height 100%
   box-shadow 0 0 5px 0 #646464
+.submit-form
+  height 100%
 .submit-appbar
   display flex
   padding 1rem
