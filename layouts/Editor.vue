@@ -314,6 +314,14 @@ export default {
     },
 
     async triggerSubmit() {
+      if (!this.userToken || this.userToken === '') {
+        this.$notify.error({
+          title: '错误',
+          message: '请登录以完成提交。',
+          duration: 10000
+        })
+        return
+      }
       const loading = this.$loading({
         lock: true,
         text: '提交'
