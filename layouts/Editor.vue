@@ -110,6 +110,7 @@
         <div v-else class="submit-container" key="submitReady">
           <div>
             <p>对 {{ fileName }} 的修改：</p>
+            <p>以下均非必填项。</p>
           </div>
           <div class="submit-form">
             <el-form label-width="80px">
