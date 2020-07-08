@@ -41,7 +41,7 @@ export default {
       this.loadingText = '登录'
       const result = await this.$http
         .post(
-          'https://github.com/login/oauth/access_token',
+          'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
           {
             client_id:
               this.$site.themeConfig.oauth[dev ? 'dev' : 'prod'].id || '',
