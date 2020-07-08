@@ -22,9 +22,9 @@
         >提交</el-button
       >
 
-      <el-dropdown>
+      <el-dropdown class="navbar-button">
         <span class="el-dropdown-link">
-          <el-avatar class="navbar-button"></el-avatar>
+          <el-avatar></el-avatar>
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -308,8 +308,6 @@ $navbar-horizontal-padding = 1.5rem
   margin 0 1rem
   border none
   background-color #00000000
-.el-avatar
-  width 50px
 .el-dropdown-link
   cursor pointer
 .home
