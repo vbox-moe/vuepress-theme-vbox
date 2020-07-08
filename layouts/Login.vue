@@ -1,6 +1,6 @@
 <template>
   <div class="theme-container" :class="pageClasses">
-    <Navbar />
+    <Navbar :show-scroll="false" />
     <div class="sb-container">
       <div class="sb-button-container" @click="triggerOAuth">
         <p class="sb-title">→ 使用 GitHub 登录</p>
