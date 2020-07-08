@@ -370,6 +370,12 @@ export default {
         }
       ).catch(() => {})
       loading.close()
+      this.$notify({
+        title: '成功',
+        message: '更改请求已经成功提交。感谢您的贡献。现在，您可以关闭此页面。',
+        duration: 10000,
+        type: 'success'
+      })
     },
 
     async triggerUserCommand(command) {
