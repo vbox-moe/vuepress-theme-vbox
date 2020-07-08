@@ -82,7 +82,8 @@ export default {
   props: {
     showScroll: {
       type: Boolean,
-      required: false
+      required: false,
+      default: true
     }
   },
 
