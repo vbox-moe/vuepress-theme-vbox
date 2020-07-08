@@ -11,14 +11,22 @@
         class="navbar-button"
         plain
         @click="triggerOpen"
-        :disabled="!this.fileName || this.fileName === ''"
+        :disabled="
+          !this.fileName ||
+            this.fileName === '' ||
+            !this.fileName.startsWith('/')
+        "
         >{{ loading ? '取消' : '打开' }}</el-button
       >
       <el-button
         class="navbar-button"
         type="primary"
         @click="triggerSubmit"
-        :disabled="!this.fileName || this.fileName === ''"
+        :disabled="
+          !this.fileName ||
+            this.fileName === '' ||
+            !this.fileName.startsWith('/')
+        "
         >提交</el-button
       >
       <el-avatar class="navbar-button"></el-avatar>
