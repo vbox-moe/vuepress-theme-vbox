@@ -96,6 +96,9 @@ export default {
       // Axios
       cancelSource: this.$http.CancelToken.source(),
 
+      // Timer
+      timer: undefined,
+
       // MD Renderer & Editor
       mdRenderer: mdit({
         html: true,
@@ -137,6 +140,12 @@ export default {
     } else this.loading = false
     if (this.fileValue && this.fileValue !== '')
       this.renderedValue = this.mdRenderer.render(this.fileValue)
+    // Timer
+    const timerFn = async () => {
+      await this.fetchUserData().catch(() => {})
+      this.timer = setTimeout(timerFn, 3000)
+    }
+    this.timer = setTimeout(timerFn, 3000)
   },
 
   methods: {
@@ -202,7 +211,9 @@ export default {
       }
     },
 
-    triggerSubmit() {}
+    triggerSubmit() {},
+
+    async fetchUserData() {}
   }
 }
 </script>
