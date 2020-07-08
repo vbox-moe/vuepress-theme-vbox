@@ -46,7 +46,7 @@
       </el-dropdown>
     </div>
     <main
-      class="home"
+      class="editor-home"
       v-loading="loading"
       element-loading-text="正在加载文档。在网络质量并不优秀的地区，这可能需要最多30秒时间。"
     >
@@ -478,7 +478,7 @@ $navbar-horizontal-padding = 1.5rem
   height 100vh
   display none
   user-select none
-.home
+.editor-home
   margin 3.6rem 0
   display block
   height 100%
