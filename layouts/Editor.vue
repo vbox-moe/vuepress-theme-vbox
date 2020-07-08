@@ -22,10 +22,8 @@
         >提交</el-button
       >
 
-      <el-dropdown class="navbar-button">
-        <span class="el-dropdown-link">
-          <el-avatar></el-avatar>
-        </span>
+      <el-dropdown class="navbar-button navbar-dropdown">
+        <el-avatar class="el-dropdown-link navbar-dropdown-content"></el-avatar>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>黄金糕</el-dropdown-item>
           <el-dropdown-item>狮子头</el-dropdown-item>
@@ -293,6 +291,10 @@ $navbar-horizontal-padding = 1.5rem
     margin-top -1px
 .navbar-button
   margin 0 10px
+.navbar-dropdown
+  display flex
+.navbar-dropdown-content
+  align-self center
 .link-slash
   margin-left 0.3rem
   margin-right 0.5rem
