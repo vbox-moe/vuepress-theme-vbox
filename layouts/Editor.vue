@@ -86,7 +86,7 @@
       size="90%"
     >
       <transition name="fade" mode="out-in">
-        <div v-if="!submitReady" class="submit-container">
+        <div v-if="!submitReady" class="submit-container" key="submitNotReady">
           <div>
             <p>要修改的文件：{{ fileName }}</p>
             <p>请审阅您对文件所做的修改。</p>
@@ -107,11 +107,27 @@
             >
           </div>
         </div>
-        <div v-else class="submit-container">
+        <div v-else class="submit-container" key="submitReady">
           <div>
             <p>对 {{ fileName }} 的修改：</p>
           </div>
-          <div class="submit-form"></div>
+          <div class="submit-form">
+            <el-form label-width="80px">
+              <el-form-item label="标题">
+                <el-input v-model="submitTitle"></el-input>
+              </el-form-item>
+              <el-form-item label="内容概要">
+                <el-input v-model="submitBody" type="textarea"></el-input>
+              </el-form-item>
+              <el-form-item label="其他">
+                <el-checkbox label="给 VBox 一个 Star！" v-model="submitStar">
+                </el-checkbox>
+                <p class="submit-thanks">
+                  我们由衷地感谢您对 VBox 所做的贡献。
+                </p>
+              </el-form-item>
+            </el-form>
+          </div>
           <div class="submit-appbar">
             <el-button plain @click="submitReady = false">返回</el-button>
             <el-button type="primary" @click="triggerSubmit">提交</el-button>
@@ -177,6 +193,11 @@ export default {
       // Submit
       submitShow: false,
       submitReady: false,
+
+      // Submit Data
+      submitTitle: '',
+      submitBody: '',
+      submitStar: true,
 
       // MD Renderer & Editor
       mdRenderer: mdit({
@@ -360,6 +381,14 @@ $navbar-horizontal-padding = 1.5rem
     height $navbarHeight - 1.4rem
     vertical-align top
     margin-top -1px
+  .el-input, .el-input__inner
+    font-size 1.5rem
+    font-weight bold
+    margin 0 1rem
+    border none
+    background-color #00000000
+  .el-dropdown-link
+    cursor pointer
 .navbar-button
   margin 0 10px
 .navbar-dropdown
@@ -375,14 +404,6 @@ $navbar-horizontal-padding = 1.5rem
   height 100vh
   display none
   user-select none
-.el-input, .el-input__inner
-  font-size 1.5rem
-  font-weight bold
-  margin 0 1rem
-  border none
-  background-color #00000000
-.el-dropdown-link
-  cursor pointer
 .home
   margin 3.6rem 0
   display block
@@ -418,8 +439,13 @@ $navbar-horizontal-padding = 1.5rem
   display flex
   padding 1rem
   justify-content center
+.submit-thanks
+  color #cccccc
+  user-select none
 .fade-enter-active, .fade-leave-active
-  transition opacity 0.5s
+  transition opacity 0.2s
+.fade-enter, .fade-leave-to
+  opacity 0
 @media (max-width: $MQMobile)
   .navbar, .home
     display none
