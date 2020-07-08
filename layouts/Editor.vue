@@ -27,7 +27,10 @@
         trigger="click"
         @command="triggerUserCommand"
       >
-        <el-avatar class="el-dropdown-link navbar-dropdown-content"></el-avatar>
+        <el-avatar
+          class="el-dropdown-link navbar-dropdown-content"
+          :src="userAvatar"
+        ></el-avatar>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item v-if="userToken && userToken !== ''" disabled>{{
             userName
@@ -174,9 +177,9 @@ export default {
     // Timer
     const timerFn = async () => {
       await this.fetchUserData().catch(() => {})
-      this.timer = setTimeout(timerFn, 3000)
+      this.timer = setTimeout(timerFn, 2000)
     }
-    this.timer = setTimeout(timerFn, 3000)
+    this.timer = setTimeout(timerFn, 2000)
   },
 
   methods: {
