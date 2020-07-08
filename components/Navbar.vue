@@ -43,6 +43,7 @@
             }
           : {}
       "
+      v-if="showScroll"
     >
       <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
       <SearchBox
@@ -75,6 +76,13 @@ export default {
   data() {
     return {
       linksWrapMaxWidth: null
+    }
+  },
+
+  props: {
+    showScroll: {
+      type: Boolean,
+      required: false
     }
   },
 
