@@ -17,7 +17,7 @@
       <el-button
         class="navbar-button"
         type="primary"
-        @click="triggerSubmit"
+        @click="submitShow = true"
         :disabled="appbarDisabled"
         >提交</el-button
       >
@@ -79,6 +79,29 @@
       />
       <p class="mobile-placeholder-element">就地编辑器需要更大的屏幕支持。</p>
     </div>
+    <el-drawer
+      title="提交"
+      :visible.sync="submitShow"
+      direction="btt"
+      size="90%"
+    >
+      <div class="submit-container">
+        <div>
+          <p>要修改的文件：{{ fileName }}</p>
+          <p>请审阅您对文件所做的修改。</p>
+        </div>
+        <div class="submit-monaco">
+          <MonacoEditor
+            class="monaco"
+            :value="fileValue"
+            :original="fileOriginalValue"
+            :diff-editor="true"
+            language="markdown"
+            :options="{ ...monacoOptions, readOnly: true }"
+          />
+        </div>
+      </div>
+    </el-drawer>
   </div>
 </template>
 
@@ -118,6 +141,7 @@ export default {
 
       // Page Data
       fileName: '',
+      fileOriginalValue: '',
       fileValue: localStorage.fileValue || '',
       renderedValue: '',
 
@@ -132,6 +156,9 @@ export default {
       userName: undefined,
       userAvatar: undefined,
       userMail: undefined,
+
+      // Submit
+      submitShow: false,
 
       // MD Renderer & Editor
       mdRenderer: mdit({
@@ -232,6 +259,7 @@ export default {
       if (!result) return
       this.fileValue = result.data
       if (!this.fileValue || this.fileValue === '') return
+      this.fileOriginalValue = this.fileValue
       this.renderedValue = this.mdRenderer.render(this.fileValue)
       this.loading = false
     },
@@ -349,7 +377,7 @@ $navbar-horizontal-padding = 1.5rem
   height 88%
   width 50%
   margin 1rem
-  box-shadow 0 0 5px 0 black
+  box-shadow 0 0 5px 0 #646464
 .root-container
   height 100vh
   width 100vw
@@ -359,6 +387,13 @@ $navbar-horizontal-padding = 1.5rem
   display block
   height 100%
   width 100%
+.submit-container
+  margin 0 2rem
+  margin-bottom 2rem
+  height 70%
+.submit-monaco
+  height 100%
+  box-shadow 0 0 5px 0 #646464
 @media (max-width: $MQMobile)
   .navbar, .home
     display none
