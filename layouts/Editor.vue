@@ -85,22 +85,28 @@
       direction="btt"
       size="90%"
     >
-      <div class="submit-container">
-        <div>
-          <p>要修改的文件：{{ fileName }}</p>
-          <p>请审阅您对文件所做的修改。</p>
+      <transition name="fade" mode="out-in">
+        <div v-if="!submitReady" class="submit-container">
+          <div>
+            <p>要修改的文件：{{ fileName }}</p>
+            <p>请审阅您对文件所做的修改。</p>
+          </div>
+          <div class="submit-monaco">
+            <MonacoEditor
+              class="monaco"
+              :value="fileValue"
+              :original="fileOriginalValue"
+              :diff-editor="true"
+              language="markdown"
+              :options="{ ...monacoOptions, readOnly: true, wordWrap: 'off' }"
+            />
+            <div class="submit-appbar">
+              <el-button type="primary">我已完成审阅</el-button>
+            </div>
+          </div>
         </div>
-        <div class="submit-monaco">
-          <MonacoEditor
-            class="monaco"
-            :value="fileValue"
-            :original="fileOriginalValue"
-            :diff-editor="true"
-            language="markdown"
-            :options="{ ...monacoOptions, readOnly: true }"
-          />
-        </div>
-      </div>
+        <div v-else class="submit-container"></div>
+      </transition>
     </el-drawer>
   </div>
 </template>
@@ -159,6 +165,7 @@ export default {
 
       // Submit
       submitShow: false,
+      submitReady: false,
 
       // MD Renderer & Editor
       mdRenderer: mdit({
@@ -394,6 +401,12 @@ $navbar-horizontal-padding = 1.5rem
 .submit-monaco
   height 100%
   box-shadow 0 0 5px 0 #646464
+.submit-appbar
+  display flex
+  padding 1rem
+  justify-content center
+.fade-enter-active, .fade-leave-active
+  transition opacity 0.5s
 @media (max-width: $MQMobile)
   .navbar, .home
     display none
