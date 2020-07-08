@@ -176,7 +176,7 @@ export default {
       // Page Data
       fileName: '',
       fileOriginalValue: '',
-      fileValue: localStorage.fileValue || '',
+      fileValue: '',
       renderedValue: '',
 
       // Axios
@@ -239,6 +239,7 @@ export default {
       this.fileName = this.$route.query.file
       this.triggerFetch()
     } else this.loading = false
+    this.fileValue = localStorage.fileValue || ''
     if (this.fileValue && this.fileValue !== '')
       this.renderedValue = this.mdRenderer.render(this.fileValue)
     // Timer
