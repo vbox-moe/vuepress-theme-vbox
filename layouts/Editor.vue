@@ -313,7 +313,64 @@ export default {
       }
     },
 
-    triggerSubmit() {},
+    async triggerSubmit() {
+      const loading = this.$loading({
+        lock: true,
+        text: '提交'
+      })
+      this.submitBody =
+        '```\n-----BEGIN SUBMIT BLOCK-----' +
+        window.btoa(
+          unescape(
+            encodeURIComponent(
+              window.btoa(unescape(encodeURIComponent(this.fileName))) +
+                ':' +
+                window.btoa(unescape(encodeURIComponent(this.fileValue)))
+            )
+          )
+        ) +
+        '-----END SUBMIT BLOCK-----\n```\n' +
+        this.submitBody
+      if (this.submitTitle === '')
+        this.submitTitle = `对 ${this.fileName} 的更改请求`
+      const result = await this.$http
+        .post(
+          `https://cors-anywhere.herokuapp.com/https://api.github.com/repos/${this
+            .$site.themeConfig.repo || ''}/issues`,
+          {
+            title: this.submitTitle,
+            body: this.submitBody
+          },
+          {
+            headers: {
+              Authorization: `token ${this.userToken}`
+            }
+          }
+        )
+        .catch((e) => {
+          loading.close()
+          this.$notify.error({
+            title: '错误',
+            message:
+              '在提交时发生了错误。请重试提交。错误的信息：' +
+              (e && e.message ? e.message : '未知'),
+            duration: 10000
+          })
+        })
+      if (!result || !result.data || !result.data.html_url) return
+      await this.$http(
+        `https://cors-anywhere.herokuapp.com/https://api.github.com/user/starred/${this
+          .$site.themeConfig.repo || ''}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Length': 0,
+            Authorization: `token ${this.userToken}`
+          }
+        }
+      ).catch(() => {})
+      loading.close()
+    },
 
     async triggerUserCommand(command) {
       if (command === 'login') {
