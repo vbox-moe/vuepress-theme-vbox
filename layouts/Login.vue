@@ -35,6 +35,50 @@ export default {
     }
   },
 
+  async mounted() {
+    const dev = location.hostname === 'localhost'
+    if ('code' in this.$route.query && this.$route.query.code !== '') {
+      this.loadingText = '登录'
+      const result = await this.$http
+        .post(
+          'https://github.com/login/oauth/access_token',
+          {
+            client_id:
+              this.$site.themeConfig.oauth[dev ? 'dev' : 'prod'].id || '',
+            client_secret:
+              this.$site.themeConfig.oauth[dev ? 'dev' : 'prod'].secret || '',
+            code: this.$route.query.code
+          },
+          {
+            headers: {
+              Accept: 'application/json'
+            }
+          }
+        )
+        .catch((e) => {
+          this.loading = false
+          this.$notify.error({
+            title: '错误',
+            message:
+              '在登录时发生了错误。您可以重试。错误的信息：' +
+              (e && e.message ? e.message : '未知'),
+            duration: 10000
+          })
+        })
+      if (result && 'data' in result && 'access_token' in result.data) {
+        localStorage.token = result.data.access_token
+        window.close()
+      } else {
+        this.loading = false
+        this.$notify.error({
+          title: '错误',
+          message: '在登录时发生了错误。您可以重试。',
+          duration: 10000
+        })
+      }
+    } else this.loading = false
+  },
+
   methods: {
     triggerOAuth() {
       const dev = location.hostname === 'localhost'
