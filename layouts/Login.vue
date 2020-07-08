@@ -1,7 +1,11 @@
 <template>
   <div class="theme-container" :class="pageClasses">
     <Navbar :show-scroll="false" />
-    <div class="sb-container">
+    <div
+      class="sb-container"
+      v-loading="loading"
+      :element-loading-text="loadingText"
+    >
       <div class="sb-button-container" @click="triggerOAuth">
         <p class="sb-title">→ 使用 GitHub 登录</p>
         <p class="sb-description">您的贡献将会被记录在 VBox 仓库内。</p>
@@ -22,6 +26,13 @@ export default {
 
   components: {
     Navbar
+  },
+
+  data() {
+    return {
+      loading: true,
+      loadingText: '加载'
+    }
   },
 
   methods: {
