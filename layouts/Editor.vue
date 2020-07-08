@@ -22,16 +22,23 @@
         >提交</el-button
       >
 
-      <el-dropdown class="navbar-button navbar-dropdown">
+      <el-dropdown
+        class="navbar-button navbar-dropdown"
+        trigger="click"
+        @command="triggerUserCommand"
+      >
         <el-avatar class="el-dropdown-link navbar-dropdown-content"></el-avatar>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item v-if="userToken && userToken !== ''" disabled>{{
             userName
           }}</el-dropdown-item>
-          <el-dropdown-item v-if="userToken && userToken !== ''" divided
+          <el-dropdown-item
+            v-if="userToken && userToken !== ''"
+            divided
+            command="logout"
             >退出</el-dropdown-item
           >
-          <el-dropdown-item v-else>登录</el-dropdown-item>
+          <el-dropdown-item v-else command="login">登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -236,6 +243,19 @@ export default {
     },
 
     triggerSubmit() {},
+
+    async triggerUserCommand(command) {
+      if (command === 'login') {
+        window.open(
+          '/login',
+          '登录 | VBox',
+          'menubar=0,location=0,scrollbars=0,toolbar=0,width=600,height=600'
+        )
+      } else if (command === 'logout') {
+        localStorage.token = ''
+        await this.fetchUserData()
+      }
+    },
 
     async fetchUserData() {
       if (!localStorage.token || localStorage.token === '') {
