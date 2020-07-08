@@ -11,22 +11,14 @@
         class="navbar-button"
         plain
         @click="triggerOpen"
-        :disabled="
-          !this.fileName ||
-            this.fileName === '' ||
-            !this.fileName.startsWith('/')
-        "
+        :disabled="appbarDisabled"
         >{{ loading ? '取消' : '打开' }}</el-button
       >
       <el-button
         class="navbar-button"
         type="primary"
         @click="triggerSubmit"
-        :disabled="
-          !this.fileName ||
-            this.fileName === '' ||
-            !this.fileName.startsWith('/')
-        "
+        :disabled="appbarDisabled"
         >提交</el-button
       >
       <el-avatar class="navbar-button"></el-avatar>
@@ -81,6 +73,16 @@ export default {
 
   components: {
     MonacoEditor
+  },
+
+  computed: {
+    appbarDisabled() {
+      return (
+        !this.fileName ||
+        this.fileName === '' ||
+        !/^\/\w+(\/\w+)+(\.md)$/.test(this.fileName)
+      )
+    }
   },
 
   data() {
