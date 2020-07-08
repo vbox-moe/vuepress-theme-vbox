@@ -25,11 +25,13 @@
       <el-dropdown class="navbar-button navbar-dropdown">
         <el-avatar class="el-dropdown-link navbar-dropdown-content"></el-avatar>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>黄金糕</el-dropdown-item>
-          <el-dropdown-item>狮子头</el-dropdown-item>
-          <el-dropdown-item>螺蛳粉</el-dropdown-item>
-          <el-dropdown-item disabled>双皮奶</el-dropdown-item>
-          <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+          <el-dropdown-item v-if="userToken && userToken !== ''" disabled>{{
+            userName
+          }}</el-dropdown-item>
+          <el-dropdown-item v-if="userToken && userToken !== ''" divided
+            >退出</el-dropdown-item
+          >
+          <el-dropdown-item v-else>登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
