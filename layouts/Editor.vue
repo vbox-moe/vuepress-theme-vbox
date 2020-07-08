@@ -85,6 +85,10 @@ export default {
     }
   },
 
+  beforeDestroy() {
+    if (this.timer) clearTimeout(this.timer)
+  },
+
   data() {
     return {
       // Page Loading
@@ -100,6 +104,12 @@ export default {
 
       // Timer
       timer: undefined,
+
+      // UserData
+      userToken: undefined,
+      userName: undefined,
+      userAvatar: undefined,
+      userMail: undefined,
 
       // MD Renderer & Editor
       mdRenderer: mdit({
@@ -215,7 +225,32 @@ export default {
 
     triggerSubmit() {},
 
-    async fetchUserData() {}
+    async fetchUserData() {
+      if (!localStorage.token || localStorage.token === '') {
+        this.userToken = ''
+        this.userName = ''
+        this.userAvatar = ''
+        this.userMail = ''
+        return
+      }
+      if (localStorage.token === this.userToken) return
+      const result = await this.$http
+        .get(
+          'https://cors-anywhere.herokuapp.com/https://api.github.com/user',
+          { headers: { Authorization: `token ${localStorage.token}` } }
+        )
+        .catch(() => {})
+      if (!result || !result.data || !result.data.login) return
+      const {
+        name: userName,
+        email: userMail,
+        avatar_url: userAvatar
+      } = result.data
+      this.userName = userName
+      this.userAvatar = userAvatar
+      this.userMail = userMail
+      this.userToken = localStorage.token
+    }
   }
 }
 </script>
