@@ -21,7 +21,19 @@
         :disabled="appbarDisabled"
         >提交</el-button
       >
-      <el-avatar class="navbar-button"></el-avatar>
+
+      <el-dropdown>
+        <span class="el-dropdown-link">
+          <el-avatar class="navbar-button"></el-avatar>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>黄金糕</el-dropdown-item>
+          <el-dropdown-item>狮子头</el-dropdown-item>
+          <el-dropdown-item>螺蛳粉</el-dropdown-item>
+          <el-dropdown-item disabled>双皮奶</el-dropdown-item>
+          <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
     <main
       class="home"
