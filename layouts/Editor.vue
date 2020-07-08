@@ -261,6 +261,8 @@ $navbar-horizontal-padding = 1.5rem
   margin 0 1rem
   border none
   background-color #00000000
+.el-avatar
+  width 50px
 .home
   margin 3.6rem 0
   display block
