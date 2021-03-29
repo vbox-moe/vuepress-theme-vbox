@@ -33,7 +33,6 @@ module.exports = (options, ctx) => {
             '.theme-default-content :not(a) > img :not(.header-bar-author-avatar)'
         }
       ],
-      '@vuepress/pwa',
       'vuepress-plugin-table-of-contents',
       'vuepress-plugin-alias',
       'vuepress-plugin-reading-time',

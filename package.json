@@ -1,6 +1,6 @@
 {
   "name": "vuepress-theme-vbox",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Default theme for VBox.",
   "keywords": [
     "documentation",
@@ -24,9 +24,8 @@
     "@vuepress/plugin-back-to-top": "^1.5.2",
     "@vuepress/plugin-medium-zoom": "^1.5.2",
     "@vuepress/plugin-nprogress": "1.5.2",
-    "@vuepress/plugin-pwa": "^1.5.2",
     "@vuepress/plugin-search": "1.5.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^2.6.11",
     "crypto-js": "^4.0.0",
     "docsearch.js": "^2.5.2",
