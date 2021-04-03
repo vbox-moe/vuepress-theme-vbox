@@ -20,11 +20,17 @@ export default {
     href: {
       type: String,
       required: true
+    },
+    outer: {
+      type: Boolean,
+      default: false,
+      required: false
     }
   },
   methods: {
     push() {
-      this.$router.push(this.href)
+      if (this.outer) window.open(this.href)
+      else this.$router.push(this.href)
     }
   }
 }
